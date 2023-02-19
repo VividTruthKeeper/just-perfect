@@ -8,13 +8,13 @@ import { json } from "body-parser";
 dotenv.config();
 
 // Routes
-import { currentUserRouter } from "./routes/current-user";
-import { deleteUserRouter } from "./routes/delete-user";
-import { signinRouter } from "./routes/signin";
-import { signoutRouter } from "./routes/signout";
-import { signupRouter } from "./routes/signup";
-import { updateUserRouter } from "./routes/update-user";
-import { changePasswordRouter } from "./routes/change-password";
+import { currentUserRouter } from "./routes/user/current-user";
+import { deleteUserRouter } from "./routes/user/delete-user";
+import { signinRouter } from "./routes/user/signin";
+import { signoutRouter } from "./routes/user/signout";
+import { signupRouter } from "./routes/user/signup";
+import { updateUserRouter } from "./routes/user/update-user";
+import { changePasswordRouter } from "./routes/user/change-password";
 
 // Middlewares
 import { errorHandler } from "./middlewares/error-handler";

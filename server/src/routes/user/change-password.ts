@@ -1,14 +1,14 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { User } from "../models/user";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { authVerify } from "../functions/auth-verify";
-import { TokenRequiredError } from "../errors/user/token-required-error";
-import { UserNotFound } from "../errors/user/user-not-found";
-import { hashPassword } from "../functions/hashPassword";
-import { createToken } from "../functions/createToken";
-import { comparePassword } from "../functions/comparePassword";
-import { OldPasswordError } from "../errors/user/old-password-error";
+import { User } from "../../models/user";
+import { RequestValidationError } from "../../errors/request-validation-error";
+import { authVerify } from "../../functions/auth-verify";
+import { TokenRequiredError } from "../../errors/user/token-required-error";
+import { UserNotFound } from "../../errors/user/user-not-found";
+import { hashPassword } from "../../functions/hashPassword";
+import { createToken } from "../../functions/createToken";
+import { comparePassword } from "../../functions/comparePassword";
+import { OldPasswordError } from "../../errors/user/old-password-error";
 
 const router = express.Router();
 

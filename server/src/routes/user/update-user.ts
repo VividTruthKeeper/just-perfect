@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { User } from "../models/user";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { authVerify } from "../functions/auth-verify";
-import { TokenRequiredError } from "../errors/user/token-required-error";
-import { UserNotFound } from "../errors/user/user-not-found";
-import { OldNameError } from "../errors/user/old-name-error";
+import { User } from "../../models/user";
+import { RequestValidationError } from "../../errors/request-validation-error";
+import { authVerify } from "../../functions/auth-verify";
+import { TokenRequiredError } from "../../errors/user/token-required-error";
+import { UserNotFound } from "../../errors/user/user-not-found";
+import { OldNameError } from "../../errors/user/old-name-error";
 
 const router = express.Router();
 

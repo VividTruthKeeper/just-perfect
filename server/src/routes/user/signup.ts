@@ -3,13 +3,13 @@ import { body, validationResult } from "express-validator";
 import { v4 as uuidv4 } from "uuid";
 
 // Errors
-import { RequestValidationError } from "../errors/request-validation-error";
+import { RequestValidationError } from "../../errors/request-validation-error";
 
 // Models
-import { User } from "../models/user";
-import { hashPassword } from "../functions/hashPassword";
-import { AlreadyExistsError } from "../errors/user/already-exists-error";
-import { createToken } from "../functions/createToken";
+import { User } from "../../models/user";
+import { hashPassword } from "../../functions/hashPassword";
+import { AlreadyExistsError } from "../../errors/user/already-exists-error";
+import { createToken } from "../../functions/createToken";
 
 const router = express.Router();
 
