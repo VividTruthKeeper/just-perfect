@@ -1,5 +1,5 @@
-import User, { IUserDocument, IUserInput } from "../models/user.model";
-import { FilterQuery, Query, QueryOptions } from "mongoose";
+import User, { IUserDocument } from "../models/user.model";
+import { FilterQuery, QueryOptions } from "mongoose";
 
 export const createUser = async (input: any) => {
   return User.create(input);
