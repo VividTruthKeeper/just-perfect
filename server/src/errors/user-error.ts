@@ -7,7 +7,7 @@ export class UserError extends CustomError {
   constructor(message: string) {
     super(message);
     this.message = message;
-    Object.setPrototypeOf(this, CustomError.prototype);
+    Object.setPrototypeOf(this, UserError.prototype);
   }
 
   serializeErrors() {

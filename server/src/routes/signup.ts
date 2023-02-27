@@ -1,10 +1,13 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { findUser } from "../services/user.service";
 
 // Errors
 import { RequestValidationError } from "../errors/request-validation-error";
 import { UserError } from "../errors/user-error";
+
+// Services
+import { findUser, createUser } from "../services/user.service";
+import createToken from "../functions/createToken";
 
 const router = express.Router();
 
@@ -40,6 +43,30 @@ router.post(
     if (userWithEmail !== null) {
       throw new UserError("User already exists");
     }
+
+    const token = await createToken(sanitizedEmail);
+    const newUser = await createUser({
+      email: sanitizedEmail,
+      firstName,
+      lastName,
+      password,
+      token,
+    });
+
+    const userJSON = newUser.toJSON();
+
+    userJSON.fullName = newUser.fullName;
+    delete userJSON.firstName;
+    delete userJSON.lastName;
+    delete userJSON.password;
+    delete userJSON.__v;
+
+    // const { password: _, ...sanitizedUser } = newUser.toJSON();
+
+    res.status(200).send({
+      status: "success",
+      user: userJSON,
+    });
   }
 );
 

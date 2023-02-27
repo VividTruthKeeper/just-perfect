@@ -4,6 +4,7 @@ dotenv.config();
 import cors from "cors";
 import { json } from "body-parser";
 
+import "express-async-errors";
 // DB
 import { setupDB } from "./utils/db";
 
@@ -14,13 +15,19 @@ import { NotFoundError } from "./errors/not-found-error";
 // Middleware
 import { errorHandler } from "./middlewares/error-handler";
 
+// Routes
+import { signupRouter } from "./routes/signup";
+
 const app = express();
 app.use(json());
 app.use(cors());
 
-const start = (): void => {
+const start = async (): Promise<void> => {
+  app.use(signupRouter);
+
+  // connect to db
   try {
-    setupDB();
+    await setupDB();
   } catch (err) {
     throw new DatabaseConnectionError();
   }
@@ -30,9 +37,10 @@ const start = (): void => {
   });
 
   app.use(errorHandler);
-
   const port: string = process.env.API_PORT || "5000";
   app.listen(port, () => console.log(`Listening on ${port}`));
 };
 
-start();
+void start();
+
+export default app;

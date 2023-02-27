@@ -6,6 +6,7 @@ export interface IUserInput extends Document {
   firstName: string;
   lastName: string;
   password: string;
+  token: string;
 }
 
 export interface IUserDocument extends IUserInput, Document {
@@ -21,6 +22,7 @@ const UserSchema: Schema = new Schema<IUserInput>(
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     password: { type: String, required: true },
+    token: { type: String, required: true },
   },
   { timestamps: true }
 );

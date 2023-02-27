@@ -13,6 +13,6 @@ export abstract class CustomError extends Error implements ICustomError {
 
   abstract serializeErrors(): {
     message: string;
-    field?: string | undefined;
+    field?: string;
   }[];
 }
