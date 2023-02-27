@@ -1,11 +1,11 @@
 import { CustomError } from "./custom-error";
 
-export class DatabaseConnectionError extends CustomError {
-  statusCode = 500;
-  reason = "Error connecting to database";
+export class NotFoundError extends CustomError {
+  statusCode = 404;
+  reason = "Not found";
 
   constructor() {
-    super("Error connecting to database");
+    super("Route not found");
     Object.setPrototypeOf(this, CustomError.prototype);
   }
 

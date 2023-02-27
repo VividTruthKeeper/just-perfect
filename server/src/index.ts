@@ -9,6 +9,7 @@ import { setupDB } from "./utils/db";
 
 // Errors
 import { DatabaseConnectionError } from "./errors/database-connection-error";
+import { NotFoundError } from "./errors/not-found-error";
 
 const app = express();
 app.use(json());
@@ -19,6 +20,10 @@ try {
 } catch (err) {
   throw new DatabaseConnectionError();
 }
+
+app.all("*", async () => {
+  throw new NotFoundError();
+});
 
 const port: string = process.env.API_PORT || "5000";
 app.listen(port, () => console.log(`Listening on ${port}`));
