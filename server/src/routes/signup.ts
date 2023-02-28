@@ -8,6 +8,7 @@ import { UserError } from "../errors/user-error";
 // Services
 import { findUser, createUser } from "../services/user.service";
 import createToken from "../functions/createToken";
+import sanitizeUser from "../functions/sanitizeUser";
 
 const router = express.Router();
 
@@ -53,15 +54,8 @@ router.post(
       token,
     });
 
-    const userJSON = newUser.toJSON();
-
+    const userJSON = sanitizeUser(newUser);
     userJSON.fullName = newUser.fullName;
-    delete userJSON.firstName;
-    delete userJSON.lastName;
-    delete userJSON.password;
-    delete userJSON.__v;
-
-    // const { password: _, ...sanitizedUser } = newUser.toJSON();
 
     res.status(200).send({
       status: "success",

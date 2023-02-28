@@ -1,5 +1,6 @@
 // Types
 import { Request, Response, NextFunction } from "express";
+
 // Errors
 import { CustomError } from "../errors/custom-error";
 
