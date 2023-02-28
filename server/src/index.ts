@@ -1,8 +1,9 @@
+import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import { json } from "body-parser";
 
 import "express-async-errors";
 // DB
