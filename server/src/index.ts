@@ -1,8 +1,8 @@
+dotenv.config();
+
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
 import cors from "cors";
-import { json } from "body-parser";
 
 import "express-async-errors";
 // DB
@@ -19,7 +19,7 @@ import { errorHandler } from "./middlewares/error-handler";
 import { signupRouter } from "./routes/signup";
 
 const app = express();
-app.use(json());
+app.use(express.json());
 app.use(cors());
 
 const start = async (): Promise<void> => {
