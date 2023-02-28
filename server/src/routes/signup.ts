@@ -42,7 +42,7 @@ router.post(
     const userWithEmail = await findUser({ email: sanitizedEmail });
 
     if (userWithEmail !== null) {
-      throw new UserError("User already exists");
+      throw new UserError("User already exists", 409);
     }
 
     const token = await createToken(sanitizedEmail);

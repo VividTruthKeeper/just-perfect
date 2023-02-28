@@ -15,10 +15,11 @@ export const findUser = async (
 
 export const assignToken = (user: IUserDocument, token: string) => {
   user.update({ token: token });
+  return user.save();
 };
 
 interface ILoginUserReturn {
-  passwordCorrect: Promise<boolean>;
+  passwordCorrect: boolean;
   user: IUserDocument;
 }
 
@@ -32,10 +33,12 @@ export const loginUser = async ({
   const user = await findUser({ email }, { lean: false });
 
   if (!user) {
-    throw new UserError("User not found");
+    throw new UserError("User not found", 404);
   }
 
-  return { passwordCorrect: user.comparePassword(password), user: user };
+  const passwordCorrect: boolean = await user.comparePassword(password);
+
+  return { passwordCorrect, user: user };
 };
 
 export const deleteAllUsers = async () => {

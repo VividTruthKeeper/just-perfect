@@ -3,12 +3,13 @@ import { body, validationResult } from "express-validator";
 
 // Functions
 import createToken from "../functions/createToken";
+import sanitizeUser from "../functions/sanitizeUser";
 
 // Services
-import { loginUser } from "../services/user.service";
+import { assignToken, loginUser } from "../services/user.service";
 
 // Model
-import User from "../models/user.model";
+import { IUserDocument } from "../models/user.model";
 
 // Errors
 import { RequestValidationError } from "../errors/request-validation-error";
@@ -25,15 +26,30 @@ router.post(
     if (!errors.isEmpty()) {
       throw new RequestValidationError(errors.array());
     }
-
+    let updatedUser: IUserDocument | null = null;
     const { email, password } = req.body;
-    let passwordCorrect: boolean = false;
-    let result;
     const sanitizedEmail: string = email.toLowerCase();
-    {passwordCorrect} = await loginUser({ email: sanitizedEmail, password });
+    const { passwordCorrect, user } = await loginUser({
+      email: sanitizedEmail,
+      password,
+    });
 
     if (passwordCorrect) {
-      const token = createToken(sanitizedEmail);
+      const token: string = await createToken(sanitizedEmail);
+      updatedUser = await assignToken(user, token);
+
+      if (!updatedUser) {
+        throw new UserError("Could not log you in", 500);
+      }
+      const userJSON = sanitizeUser(updatedUser.toJSON());
+      userJSON.fullName = updatedUser.fullName;
+
+      res.status(200).send({
+        status: "success",
+        user: userJSON,
+      });
+    } else {
+      throw new UserError("Incorrect password", 401);
     }
   }
 );
