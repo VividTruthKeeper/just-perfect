@@ -14,7 +14,7 @@ export const findUser = async (
 };
 
 export const assignToken = (user: IUserDocument, token: string) => {
-  user.update({ token: token });
+  user.token = token;
   return user.save();
 };
 
@@ -38,7 +38,7 @@ export const loginUser = async ({
 
   const passwordCorrect: boolean = await user.comparePassword(password);
 
-  return { passwordCorrect, user: user };
+  return { passwordCorrect, user };
 };
 
 export const deleteAllUsers = async () => {

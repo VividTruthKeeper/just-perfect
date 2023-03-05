@@ -10,7 +10,6 @@ export interface IUserInput extends Document {
 }
 
 export interface IUserDocument extends IUserInput, Document {
-  fullName: string;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
@@ -28,10 +27,6 @@ const UserSchema: Schema = new Schema<IUserInput>(
 );
 
 UserSchema.index({ email: 1 });
-
-UserSchema.virtual("fullName").get(function (this: IUserDocument) {
-  return `${this.firstName} ${this.lastName}`;
-});
 
 UserSchema.pre("save", async function (this: IUserDocument, next) {
   if (!this.isModified("password")) return next();

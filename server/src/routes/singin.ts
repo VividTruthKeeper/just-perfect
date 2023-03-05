@@ -41,12 +41,11 @@ router.post(
       if (!updatedUser) {
         throw new UserError("Could not log you in", 500);
       }
-      const userJSON = sanitizeUser(updatedUser.toJSON());
-      userJSON.fullName = updatedUser.fullName;
+      const sanitizedUser = sanitizeUser(updatedUser);
 
       res.status(200).send({
         status: "success",
-        user: userJSON,
+        user: sanitizedUser,
       });
     } else {
       throw new UserError("Incorrect password", 401);

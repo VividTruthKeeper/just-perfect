@@ -20,7 +20,7 @@ router.post(
       .withMessage("First name must be between 3 and 20 characters"),
     body("lastName")
       .isLength({ min: 3, max: 20 })
-      .withMessage("First name must be between 3 and 20 characters"),
+      .withMessage("Last name must be between 3 and 20 characters"),
     body("email").isEmail().withMessage("Invalid email"),
     body("password")
       .trim()
@@ -55,7 +55,6 @@ router.post(
     });
 
     const userJSON = sanitizeUser(newUser);
-    userJSON.fullName = newUser.fullName;
 
     res.status(200).send({
       status: "success",

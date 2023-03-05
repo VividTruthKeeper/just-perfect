@@ -18,6 +18,7 @@ import { errorHandler } from "./middlewares/error-handler";
 // Routes
 import { signupRouter } from "./routes/signup";
 import { signinRouter } from "./routes/singin";
+import { currentUserRouter } from "./routes/current-user";
 
 const app = express();
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use(cors());
 const start = async (): Promise<void> => {
   app.use(signupRouter);
   app.use(signinRouter);
+  app.use(currentUserRouter);
 
   // connect to db
   try {
