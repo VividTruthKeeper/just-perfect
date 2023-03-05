@@ -2,13 +2,13 @@ import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 
 // Errors
-import { RequestValidationError } from "../errors/request-validation-error";
-import { UserError } from "../errors/user-error";
+import { RequestValidationError } from "../../errors/request-validation-error";
+import { UserError } from "../../errors/user-error";
 
 // Services
-import { findUser, createUser } from "../services/user.service";
-import createToken from "../functions/createToken";
-import sanitizeUser from "../functions/sanitizeUser";
+import { findUser, createUser } from "../../services/user.service";
+import createToken from "../../functions/createToken";
+import sanitizeUser from "../../functions/sanitizeUser";
 
 const router = express.Router();
 

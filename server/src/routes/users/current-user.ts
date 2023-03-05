@@ -1,18 +1,18 @@
 import express, { Request, Response } from "express";
 
 // Functions
-import sanitizeUser from "../functions/sanitizeUser";
+import sanitizeUser from "../../functions/sanitizeUser";
 
 // Services
-import { assignToken, findUser, loginUser } from "../services/user.service";
+import { assignToken, findUser, loginUser } from "../../services/user.service";
 
 // Model
-import { IUserDocument } from "../models/user.model";
+import { IUserDocument } from "../../models/user.model";
 
 // Errors
-import { UserError } from "../errors/user-error";
-import { TokenError } from "../errors/token-error";
-import { handleToken } from "../functions/handleToken";
+import { UserError } from "../../errors/user-error";
+import { TokenError } from "../../errors/token-error";
+import { handleToken } from "../../functions/handleToken";
 
 const router = express.Router();
 

@@ -16,9 +16,9 @@ import { NotFoundError } from "./errors/not-found-error";
 import { errorHandler } from "./middlewares/error-handler";
 
 // Routes
-import { signupRouter } from "./routes/signup";
-import { signinRouter } from "./routes/singin";
-import { currentUserRouter } from "./routes/current-user";
+import { signupRouter } from "./routes/users/signup";
+import { signinRouter } from "./routes/users/singin";
+import { currentUserRouter } from "./routes/users/current-user";
 
 const app = express();
 app.use(express.json());
